@@ -1,0 +1,31 @@
+###
+GET http://localhost:8095/books?page=0&size=10
+
+###
+POST http://localhost:8095/books
+Content-Type: application/json
+
+{
+  "isbn": 55555,
+  "category": "Fiction",
+  "title": "Harry Potter and the order of the Phoenix",
+  "author": "J.K Rowling"
+}
+
+###
+GET http://localhost:8095/books/11
+
+###
+PUT http://localhost:8095/books
+Content-Type: application/json
+
+{
+  "id": 11,
+  "isbn": 55567,
+  "category": "Fiction",
+  "title": "Harry Potter and the prisoner of Azkaban",
+  "author": "J.K Rowling"
+}
+
+###
+DELETE http://localhost:8095/books/11
