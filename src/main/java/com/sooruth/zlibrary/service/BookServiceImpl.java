@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class BookServiceImpl implements BookService {
+public final class BookServiceImpl implements BookService {
 
     private final Logger LOG = LoggerFactory.getLogger(BookServiceImpl.class);
 

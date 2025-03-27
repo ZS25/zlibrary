@@ -15,7 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("/books")
-public class BookControllerImpl implements BookController {
+public final class BookControllerImpl implements BookController {
 
     private final Logger LOG = LoggerFactory.getLogger(BookControllerImpl.class);
 

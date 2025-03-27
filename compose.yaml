@@ -1,16 +1,12 @@
 version: '3.8'
-networks:
-  zuni_network:
-    driver: bridge
 services:
   dbzlibrary:
-    image: postgres:17.2
+    image: mysql:9.2.0
     restart: always
     ports:
-      - "5433:5432"
+      - "3306:3306"
     environment:
-      POSTGRES_USERNAME: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
-    networks:
-      - zuni_network
+      - MYSQL_USER:user
+      - MYSQL_PASSWORD:password
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=mysql
