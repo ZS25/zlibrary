@@ -1,10 +1,7 @@
 package com.sooruth.zlibrary.service;
 
 import com.sooruth.zlibrary.entity.Book;
-import com.sooruth.zlibrary.exception.ZlibraryRuntimeException;
 import com.sooruth.zlibrary.repository.BookRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,9 +12,6 @@ import java.util.Optional;
 
 @Service
 public final class BookServiceImpl implements BookService {
-
-    private final Logger LOG = LoggerFactory.getLogger(BookServiceImpl.class);
-
     private final BookRepository bookRepository;
 
     public BookServiceImpl(BookRepository bookRepository) {
@@ -33,8 +27,8 @@ public final class BookServiceImpl implements BookService {
     public Book read(Long id) {
         Optional<Book> bookOptional = bookRepository.findById(id);
 
-        return bookOptional.orElseThrow(() -> new ZlibraryRuntimeException(
-                String.format("Book with ID:%d not found!", id)));
+        return bookOptional.orElseThrow(() -> new IllegalArgumentException(
+                String.format("Book with ID: %d not found!", id)));
     }
 
     @Override
@@ -46,18 +40,16 @@ public final class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book update(Book book) {
+    public void update(Book book) {
         Book bookFromDatabase = read(book.getId());
-        if(null == bookFromDatabase){
-            throw new ZlibraryRuntimeException(String.format("Book with ID:%d does not exist!", book.getId()));
-        }
+
         bookFromDatabase.setIsbn(book.getIsbn());
         bookFromDatabase.setCategory(book.getCategory());
         bookFromDatabase.setTitle(book.getTitle());
         bookFromDatabase.setAuthor(book.getAuthor());
         bookFromDatabase.setDateUpdated(LocalDateTime.now());
 
-        return bookRepository.save(bookFromDatabase);
+        bookRepository.save(bookFromDatabase);
     }
 
     @Override
