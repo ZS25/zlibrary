@@ -138,6 +138,15 @@ public class Book {
 
     @Override
     public String toString() {
-        return STR."Book{id=\{id}, isbn=\{isbn}, category='\{category}\{'\''}, title='\{title}\{'\''}, author='\{author}\{'\''}, dateCreated=\{dateCreated}, dateUpdated=\{dateUpdated}\{'}'}";
+        return """
+        Book{id=%s, isbn=%s, category='%s', title='%s', author='%s', dateCreated=%s, dateUpdated=%s}
+        """.formatted(
+                id,
+                isbn,
+                category,
+                title,
+                author,
+                dateCreated,
+                dateUpdated);
     }
 }
